@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="mysql-connector-java-8.0.20">
+    <archive path="C:/Users/ouard/Desktop/mysql-connector-java-8.0.20/mysql-connector-java-8.0.20/mysql-connector-java-8.0.20.jar" />
+  </library>
+  <library name="ojdbc6">
+    <archive path="C:/Program Files/Java/jdk1.8.0_181/jre/lib/ext/ojdbc6.jar" />
+  </library>
+  <library name="ojdbc6">
+    <archive path="C:/Program Files/Java/jdk1.8.0_181/jre/lib/ext/ojdbc6.jar" />
+  </library>
+</eclipse-userlibraries>
+

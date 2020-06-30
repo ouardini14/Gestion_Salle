@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="ojdbc6" value="project"/>
+		<level name="mysql-connector-java-8.0.20" value="project"/>
+	</levels>
+</component>
