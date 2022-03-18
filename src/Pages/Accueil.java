@@ -18,13 +18,12 @@ public class Accueil extends JFrame  {
     private JPanel contentPane;
     private JTextField num;
     private JComboBox type;
-    private JTextField prof;
     private JComboBox reservation;
-    private JComboBox departement;
+    private JComboBox zone;
     private JTextField Date;
     private JTextField numres;
     private JTextField hr;
-    JLabel lbldepartement;
+    JLabel lblzone;
     JLabel lblDate;
     JLabel lbltype;
     JLabel lblreservation;
@@ -44,7 +43,7 @@ public class Accueil extends JFrame  {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Accueil frame = new Accueil("mehdi","haroui");
+                    Accueil frame = new Accueil("admin","admin");
                     frame.setTitle("Accueil");
                     frame.setVisible(true);
                 } catch (Exception e) {
@@ -78,6 +77,7 @@ public class Accueil extends JFrame  {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
+        
         JPanel panel = new JPanel();
         panel.setForeground(SystemColor.window);
         panel.setBounds(0, -32, 800, 500);
@@ -118,7 +118,7 @@ public class Accueil extends JFrame  {
         lbllname.setBounds(10, 80, 112, 30);
         panel_1.add(lbllname);
 
-        JLabel lbllsl= new JLabel("Les salles de l'etablissement :");
+        JLabel lbllsl= new JLabel("Les positions du parking :");
         lbllsl.setForeground(Color.WHITE);
         lbllsl.setBounds(10, 112, 180, 30);
         panel_1.add(lbllsl);
@@ -139,15 +139,15 @@ public class Accueil extends JFrame  {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost/exam?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
-            String sql2 = "select  *from salle ";
-            pst = conn.prepareStatement(sql2);
+            String sql2 = "select  *from position ";
+            pst = conn.prepareStatement(sql2); 
             ResultSet  rs2 = pst.executeQuery();
             int i=0;
             int x=155;
             while (rs2.next()==true)
             {i++;
             x+=30;
-                JLabel label_1 = new JLabel("Salle : "+rs2.getInt(1)+" ||");
+                JLabel label_1 = new JLabel("position : "+rs2.getInt(1)+" ||");
                 label_1.setBounds(10, x, 150, 100);
                 panel_4.add(label_1);
               }
@@ -161,23 +161,23 @@ public class Accueil extends JFrame  {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost/exam?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
-            String sql2 = "select  *from salle where reserve='oui'";
+            String sql2 = "select  *from position where reserve='oui'";
             pst = conn.prepareStatement(sql2);
             ResultSet  rs2 = pst.executeQuery();
             int i=0;
             while (rs2.next() == true)
             {i++;}
-            JLabel label_1 = new JLabel("Nombre des salles reservées :  "+i);
+            JLabel label_1 = new JLabel("Nombre des positions reservées :  "+i);
             label_1.setBounds(25, 400, 220, 15);
             panel_2.add(label_1);
 
-            String sql3 = "select  *from salle ";
+            String sql3 = "select  *from position ";
             pst = conn.prepareStatement(sql3);
             ResultSet  rs3 = pst.executeQuery();
             int j=0;
             while (rs3.next() == true)
             {j++;}
-            JLabel label_2 = new JLabel("Nombre totale des salles :  "+j);
+            JLabel label_2 = new JLabel("Nombre totale des positions :  "+j);
             label_2.setBounds(25, 430, 220, 15);
             panel_2.add(label_2);
         }
@@ -192,14 +192,14 @@ public class Accueil extends JFrame  {
         panel_2.add(num);
         num.setColumns(10);
 
-        lblnum= new JLabel("Numéro de la salle :");
+        lblnum= new JLabel("Numéro de la position :");
         lblnum.setBounds(25, 12, 125, 15);
         panel_2.add(lblnum);
 
-        lbldepartement = new JLabel("Departement :");
-        lbldepartement.setBounds(225, 12, 200, 15);
-        lbldepartement.setVisible(false);
-        panel_3.add(lbldepartement);
+        lblzone = new JLabel("zone :");
+        lblzone.setBounds(225, 12, 200, 15);
+        lblzone.setVisible(false);
+        panel_3.add(lblzone);
 
         lbltype= new JLabel("Type :");
         lbltype.setVisible(false);
@@ -267,7 +267,7 @@ public class Accueil extends JFrame  {
                             ResultSet rs6 = pst.executeQuery();
                             if (!rs6.next() == true) {
 
-                                String sql7 = " update salle set reserve='non',id=NULL,date=NULL,hour=NULL where num='"+num.getText()+"' ";
+                                String sql7 = " update position set reserve='non',id=NULL,date=NULL,hour=NULL where num='"+num.getText()+"' ";
                                 pst = conn.prepareStatement(sql7);
                                 pst.executeUpdate();
 
@@ -348,7 +348,7 @@ public class Accueil extends JFrame  {
         hr.setBounds(240, 280, 220, 35);
         panel_3.add(hr);
 
-         reserve = new JButton("Reserver cette salle");
+         reserve = new JButton("Reserver cette position");
         reserve.setBounds(200, 230, 150, 25);
         panel_3.add(reserve);
         reserve.setVisible(false);
@@ -367,10 +367,10 @@ public class Accueil extends JFrame  {
 
             }
         });
-
-         save = new JButton("Enregistrer");
-        save.setBounds(85, 230, 100, 25);
-        panel_3.add(save);
+      
+         save = new JButton("Enregistrer");             
+        save.setBounds(85, 230, 100, 25);          
+        panel_3.add(save);                                                        
         save.setVisible(false);
         save.setForeground(Color.WHITE);
         save.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -384,7 +384,7 @@ public class Accueil extends JFrame  {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     conn = DriverManager.getConnection("jdbc:mysql://localhost/exam?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
-                    String sql = "Select *from salle where num='"+num.getText()+"'";
+                    String sql = "Select *from position where num='"+num.getText()+"'";
 
                     pst = conn.prepareStatement(sql);
                     ResultSet  rs = pst.executeQuery();
@@ -404,11 +404,11 @@ public class Accueil extends JFrame  {
                             pst = conn.prepareStatement(sql2);
                             pst.executeUpdate();
 
-                            String sql4 = " update salle set reserve='oui',id='" + ty + "',date='" + Date.getText() + "',hour='" + hr.getText() + "' where num='" + num.getText() + "' ";
+                            String sql4 = " update position set reserve='oui',id='" + ty + "',date='" + Date.getText() + "',hour='" + hr.getText() + "' where num='" + num.getText() + "' ";
                             pst = conn.prepareStatement(sql4);
                             pst.executeUpdate();
 
-                            JOptionPane.showMessageDialog(panel, "Vous avez reservé la salle numéro " + num.getText());
+                            JOptionPane.showMessageDialog(panel, "Vous avez reservé la position numéro " + num.getText());
 
                             ResultSet rs5 = null;
                             try {
@@ -504,7 +504,7 @@ public class Accueil extends JFrame  {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     conn = DriverManager.getConnection("jdbc:mysql://localhost/exam?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
-                    String sql2 = "select  *from salle where num='"+num.getText()+"'";
+                    String sql2 = "select  *from position where num='"+num.getText()+"'";
                     pst = conn.prepareStatement(sql2);
                     ResultSet  rs2 = pst.executeQuery();
 
@@ -514,11 +514,11 @@ public class Accueil extends JFrame  {
                         String ty2=rs2.getString(3);
                         String ty3=rs2.getString(7);
 
-                        lblreservation.setText("ReservÃ© : "+ty2);
+                        lblreservation.setText("Reservé : "+ty2);
                         lbltype.setText("Type : "+ty);
-                        lbldepartement.setText("Departement : "+ty3);
+                        lblzone.setText("Zone : "+ty3);
 
-                        lbldepartement.setVisible(true);
+                        lblzone.setVisible(true);
                         lbltype.setVisible(true);
                         lblreservation.setVisible(true);
 
@@ -561,7 +561,7 @@ public class Accueil extends JFrame  {
                            }
                     }
                     else{
-                        JOptionPane.showMessageDialog(panel,"Salle Introuvable");
+                        JOptionPane.showMessageDialog(panel,"position Introuvable");
                     }
 
                 } catch (Exception e) {

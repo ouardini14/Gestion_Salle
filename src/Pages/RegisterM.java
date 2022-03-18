@@ -51,7 +51,7 @@ public class RegisterM extends JFrame {
 		setResizable(true);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 746, 495);
+		setBounds(100, 100, 1346, 495);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,7 +59,7 @@ public class RegisterM extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, -28, 377, 501);
+		panel.setBounds(0, -0, 0, 0);
 		contentPane.add(panel);
 		
 		JLabel label = new JLabel("");
@@ -96,7 +96,7 @@ public class RegisterM extends JFrame {
 							ResultSet  rs3 = pst3.executeQuery();
 							if (rs3.next() == true)
 							{
-								JOptionPane.showMessageDialog(panel,"cet utilisateur est dÃ©ja inscrit!!");
+								JOptionPane.showMessageDialog(panel,"cet utilisateur est déja inscrit!!");
 							}
 							else{
 						String sql4 = "insert into user_en (fname,lname,email,password) values('"+Nom.getText()+"','"+Prenom.getText()+"','"+email.getText()+"','"+PasswordField.getText()+"')";
